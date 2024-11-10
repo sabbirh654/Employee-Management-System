@@ -5,6 +5,10 @@ VisualStudioVersion = 17.11.35327.3
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.API", "EMS.API.csproj", "{08C82810-6E55-4CF2-AC8E-5F2214644CA3}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Repository", "..\EMS.Repository\EMS.Repository.csproj", "{71DF3C69-7042-4FE6-9FC1-FEF13D56EE8B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EMS.Services", "..\EMS.Services\EMS.Services.csproj", "{1B0168F1-4FBA-4675-9BEA-7B3681D8CEC7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +19,14 @@ Global
 		{08C82810-6E55-4CF2-AC8E-5F2214644CA3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08C82810-6E55-4CF2-AC8E-5F2214644CA3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08C82810-6E55-4CF2-AC8E-5F2214644CA3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{71DF3C69-7042-4FE6-9FC1-FEF13D56EE8B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{71DF3C69-7042-4FE6-9FC1-FEF13D56EE8B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{71DF3C69-7042-4FE6-9FC1-FEF13D56EE8B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{71DF3C69-7042-4FE6-9FC1-FEF13D56EE8B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1B0168F1-4FBA-4675-9BEA-7B3681D8CEC7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B0168F1-4FBA-4675-9BEA-7B3681D8CEC7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B0168F1-4FBA-4675-9BEA-7B3681D8CEC7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B0168F1-4FBA-4675-9BEA-7B3681D8CEC7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
