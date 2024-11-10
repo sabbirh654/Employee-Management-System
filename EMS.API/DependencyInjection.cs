@@ -1,6 +1,8 @@
-﻿using EMS.Repository.Implementations;
+﻿using EMS.Repository.Factory;
+using EMS.Repository.Implementations;
 using EMS.Repository.Interfaces;
 using EMS.Repository.Models;
+using EMS.Repository.Settings;
 using EMS.Services.Implementations;
 using EMS.Services.Interfaces;
 
@@ -18,6 +20,8 @@ namespace EMS.API
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IDesignationService, DesignationService>();
 
+            services.AddSingleton<IDatabaseFactory, DatabaseFactory>();
+
             return services;
         }
 
@@ -26,6 +30,15 @@ namespace EMS.API
             services.AddControllers();
             services.AddEndpointsApiExplorer();
             services.AddSwaggerGen();
+
+            return services;
+        }
+
+        public static IServiceCollection RegisterConfigurationSettings(this IServiceCollection services, WebApplicationBuilder builder)
+        {
+            services.Configure<SqlServerSettings>(builder.Configuration.GetSection("SqlServerDatabase"));
+            services.Configure<PostgreSqlSettings>(builder.Configuration.GetSection("PostgreSqlDatabase"));
+            services.Configure<MongoDBSettings>(builder.Configuration.GetSection("MongoDatabase"));
 
             return services;
         }
