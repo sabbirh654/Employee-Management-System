@@ -1,32 +1,39 @@
-﻿using EMS.Repository.Models;
+﻿using EMS.Repository.Interfaces;
+using EMS.Repository.Models;
 using EMS.Services.Interfaces;
 
 namespace EMS.Services.Implementations;
 
 public class DepartmentService : IDepartmentService
 {
-    public Task AddDepartment(Department department)
+    private readonly IRepository<Department> _repository;
+
+    public DepartmentService(IRepository<Department> repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
+    }
+    public async Task AddDepartment(Department department)
+    {
+        await _repository.AddAsync(department);
     }
 
-    public Task DeleteDepartment(int id)
+    public async Task DeleteDepartment(int id)
     {
-        throw new NotImplementedException();
+        await _repository.DeleteAsync(id);
     }
 
-    public Task<IEnumerable<Department>> GetAllDepartments()
+    public async Task<IEnumerable<Department>> GetAllDepartments()
     {
-        throw new NotImplementedException();
+        return await _repository.GetAllAsync();
     }
 
-    public Task<Department> GetDepartmentById(int id)
+    public async Task<Department> GetDepartmentById(int id)
     {
-        throw new NotImplementedException();
+        return await _repository.GetByIdAsync(id);
     }
 
-    public Task UpdateDepartment(Department department)
+    public async Task UpdateDepartment(Department department)
     {
-        throw new NotImplementedException();
+        await _repository.UpdateAsync(department);
     }
 }

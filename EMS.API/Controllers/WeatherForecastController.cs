@@ -1,3 +1,5 @@
+using EMS.Repository.Models;
+using EMS.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 
 namespace EMS.API.Controllers
@@ -12,15 +14,20 @@ namespace EMS.API.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-
-        public WeatherForecastController(ILogger<WeatherForecastController> logger)
+        private readonly IDepartmentService _departmentService;
+        public WeatherForecastController(ILogger<WeatherForecastController> logger,
+            IDepartmentService departmentService)
         {
+            _departmentService = departmentService;
             _logger = logger;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
-        public IEnumerable<WeatherForecast> Get()
+        public async Task<IEnumerable<WeatherForecast>> Get()
         {
+           
+            var d = await _departmentService.GetAllDepartments();
+
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {
                 Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),

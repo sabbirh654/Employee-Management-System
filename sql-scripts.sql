@@ -32,3 +32,45 @@ CREATE TABLE Employee(
 	CONSTRAINT FK_Employee_Designation FOREIGN KEY(DesignationId) REFERENCES Designation(Id),
 	CONSTRAINT FK_Employee_Department FOREIGN KEY(DepartmentId) REFERENCES Department(Id),
 );
+
+CREATE PROCEDURE AddNewDepartment
+	@Name NVARCHAR(100)
+
+AS
+BEGIN
+    INSERT INTO Department(Name)
+	VALUES(@Name);
+END;
+
+CREATE PROCEDURE GetAllDepartments
+AS
+BEGIN
+	SELECT Id, Name FROM Department;
+END;
+
+CREATE PROCEDURE GetDepartmentById
+	@Id INT
+AS
+BEGIN
+	SELECT Id, Name FROM Department
+	WHERE Id = @Id;
+END;
+
+CREATE PROCEDURE UpdateDepartment
+	@Id INT,
+	@Name NVARCHAR(100)
+AS
+BEGIN
+	UPDATE Department
+	SET Name = @Name
+	WHERE Id = @Id;
+END;
+
+CREATE PROCEDURE DeleteDepartment
+	@Id INT
+AS
+BEGIN
+	UPDATE Department
+	SET IsDeleted = 1
+	WHERE Id = @Id;
+END;

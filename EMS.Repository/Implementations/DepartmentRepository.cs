@@ -1,32 +1,88 @@
-﻿using EMS.Repository.Interfaces;
+﻿using Dapper;
+using EMS.Repository.Factory;
+using EMS.Repository.Helpers;
+using EMS.Repository.Interfaces;
 using EMS.Repository.Models;
+using System.Data;
 
 namespace EMS.Repository.Implementations;
 
 public class DepartmentRepository : IRepository<Department>
 {
-    public Task AddAsync(Department entity)
+    private readonly IDatabaseFactory _databaseFactory;
+
+    public DepartmentRepository(IDatabaseFactory databaseFactory)
     {
-        throw new NotImplementedException();
+        _databaseFactory = databaseFactory;
+    }
+    public async Task AddAsync(Department department)
+    {
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Name", department.Name);
+
+            await db.ExecuteAsync(
+                StoredProcName.AddNewDepartment, 
+                parameters, 
+                commandType: CommandType.StoredProcedure);
+        }
     }
 
-    public Task DeleteAsync(int id)
+    public async Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", id);
+
+            await db.ExecuteAsync(
+                    StoredProcName.DeleteDepartment,
+                    parameters,
+                    commandType: CommandType.StoredProcedure);
+        }
     }
 
-    public Task<IEnumerable<Department>> GetAllAsync()
+    public async Task<IEnumerable<Department>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var departments =  await db.QueryAsync<Department>(
+                StoredProcName.GetAllDepartments, 
+                commandType: CommandType.StoredProcedure);
+
+            return departments;
+        }
     }
 
-    public Task<Department> GetByIdAsync(int id)
+    public async Task<Department> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", id);
+
+            var department = await db.QueryFirstOrDefaultAsync<Department>(
+                StoredProcName.GetDepartmentById, 
+                parameters, 
+                commandType: CommandType.StoredProcedure);
+
+            return department;
+        }
     }
 
-    public Task UpdateAsync(Department entity)
+    public async Task UpdateAsync(Department department)
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", department.Id);
+            parameters.Add("@Name", department.Name);
+
+            await db.ExecuteAsync(
+                StoredProcName.UpdateDepartment, 
+                parameters, 
+                commandType: CommandType.StoredProcedure);
+        }
     }
 }
