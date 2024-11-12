@@ -1,32 +1,40 @@
-﻿using EMS.Repository.Models;
+﻿using EMS.Repository.Interfaces;
+using EMS.Repository.Models;
 using EMS.Services.Interfaces;
 
 namespace EMS.Services.Implementations;
 
 public class EmployeeService : IEmployeeService
 {
-    public Task AddEmployee(Employee employee)
+    private readonly IEmployeeRepository _repository;
+
+    public EmployeeService(IEmployeeRepository repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
     }
 
-    public Task DeleteEmployee(int id)
+    public async Task AddEmployee(Employee employee)
     {
-        throw new NotImplementedException();
+        await _repository.AddAsync(employee);
     }
 
-    public Task<IEnumerable<Employee>> GetAllEmployees()
+    public async Task DeleteEmployee(int id)
     {
-        throw new NotImplementedException();
+        await _repository.DeleteAsync(id);
     }
 
-    public Task<Employee> GetEmployeeById(int id)
+    public async Task<IEnumerable<EmployeeDetails>> GetAllEmployees()
     {
-        throw new NotImplementedException();
+        return await _repository.GetAllAsync();
     }
 
-    public Task UpdateEmployee(Employee employee)
+    public async Task<EmployeeDetails> GetEmployeeById(int id)
     {
-        throw new NotImplementedException();
+        return await _repository.GetByIdAsync(id);
+    }
+
+    public async Task UpdateEmployee(Employee employee)
+    {
+        await _repository.UpdateAsync(employee);
     }
 }

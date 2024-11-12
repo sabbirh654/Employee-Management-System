@@ -7,7 +7,7 @@ using System.Data;
 
 namespace EMS.Repository.Implementations;
 
-public class DepartmentRepository : IRepository<Department>
+public class DepartmentRepository : IDepartmentRepository
 {
     private readonly IDatabaseFactory _databaseFactory;
 

@@ -14,19 +14,29 @@ namespace EMS.API.Controllers
         };
 
         private readonly ILogger<WeatherForecastController> _logger;
-        private readonly IDepartmentService _departmentService;
+        private readonly IEmployeeService _employeeService;
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
-            IDepartmentService departmentService)
+            IEmployeeService employeeService)
         {
-            _departmentService = departmentService;
+            _employeeService = employeeService;
             _logger = logger;
         }
 
         [HttpGet(Name = "GetWeatherForecast")]
         public async Task<IEnumerable<WeatherForecast>> Get()
         {
-           
-            var d = await _departmentService.GetAllDepartments();
+            var emp = new Employee
+            {
+                Name = "Sabbir Hasan",
+                Email = "sabbirh1000@gmail.com",
+                Address = "Dhaka",
+                Phone = "1234567",
+                DOB = new DateTime(1990, 12, 12),
+                DepartmentId = 1006,
+                DesignationId = 1,
+            };
+
+            var res = await _employeeService.GetAllEmployees();
 
             return Enumerable.Range(1, 5).Select(index => new WeatherForecast
             {

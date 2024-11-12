@@ -1,32 +1,89 @@
-﻿using EMS.Repository.Interfaces;
+﻿using Dapper;
+using EMS.Repository.Factory;
+using EMS.Repository.Helpers;
+using EMS.Repository.Interfaces;
 using EMS.Repository.Models;
+using System.Data;
 
 namespace EMS.Repository.Implementations;
 
-public class DesignationRepository : IRepository<Designation>
+public class DesignationRepository : IDesignationRepository
 {
-    public Task AddAsync(Designation entity)
+    private readonly IDatabaseFactory _databaseFactory;
+
+    public DesignationRepository(IDatabaseFactory databaseFactory)
     {
-        throw new NotImplementedException();
+        _databaseFactory = databaseFactory;
     }
 
-    public Task DeleteAsync(int id)
+    public async Task AddAsync(Designation designation)
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Name", designation.Name);
+
+            await db.ExecuteAsync(
+                StoredProcName.AddNewDesignation,
+                parameters,
+                commandType: CommandType.StoredProcedure);
+        }
     }
 
-    public Task<IEnumerable<Designation>> GetAllAsync()
+    public async Task DeleteAsync(int id)
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", id);
+
+            await db.ExecuteAsync(
+                    StoredProcName.DeleteDesignation,
+                    parameters,
+                    commandType: CommandType.StoredProcedure);
+        }
     }
 
-    public Task<Designation> GetByIdAsync(int id)
+    public async Task<IEnumerable<Designation>> GetAllAsync()
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var designations = await db.QueryAsync<Designation>(
+                StoredProcName.GetAllDesignations,
+                commandType: CommandType.StoredProcedure);
+
+            return designations;
+        }
     }
 
-    public Task UpdateAsync(Designation entity)
+    public async Task<Designation> GetByIdAsync(int id)
     {
-        throw new NotImplementedException();
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", id);
+
+            var designation = await db.QueryFirstOrDefaultAsync<Designation>(
+                StoredProcName.GetDesignationById,
+                parameters,
+                commandType: CommandType.StoredProcedure);
+
+            return designation;
+        }
+    }
+
+    public async Task UpdateAsync(Designation designation)
+    {
+        using (var db = _databaseFactory.CreateSqlServerConnection())
+        {
+            var parameters = new DynamicParameters();
+            parameters.Add("@Id", designation.Id);
+            parameters.Add("@Name", designation.Name);
+
+            await db.ExecuteAsync(
+                StoredProcName.UpdateDepartment,
+                parameters,
+                commandType: CommandType.StoredProcedure);
+        }
     }
 }

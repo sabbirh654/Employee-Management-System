@@ -6,9 +6,9 @@ namespace EMS.Services.Implementations;
 
 public class DepartmentService : IDepartmentService
 {
-    private readonly IRepository<Department> _repository;
+    private readonly IDepartmentRepository _repository;
 
-    public DepartmentService(IRepository<Department> repository)
+    public DepartmentService(IDepartmentRepository repository)
     {
         _repository = repository;
     }

@@ -1,32 +1,40 @@
-﻿using EMS.Repository.Models;
+﻿using EMS.Repository.Interfaces;
+using EMS.Repository.Models;
 using EMS.Services.Interfaces;
 
 namespace EMS.Services.Implementations;
 
 public class DesignationService : IDesignationService
 {
-    public Task AddDesignation(Designation designation)
+    private readonly IDesignationRepository _repository;
+
+    public DesignationService(IDesignationRepository repository)
     {
-        throw new NotImplementedException();
+        _repository = repository;
     }
 
-    public Task DeleteDesignation(int id)
+    public async Task AddDesignation(Designation designation)
     {
-        throw new NotImplementedException();
+        await _repository.AddAsync(designation);
     }
 
-    public Task<IEnumerable<Designation>> GetAllDesignations()
+    public async Task DeleteDesignation(int id)
     {
-        throw new NotImplementedException();
+        await _repository.DeleteAsync(id);
     }
 
-    public Task<Designation> GetDesignationById(int id)
+    public async Task<IEnumerable<Designation>> GetAllDesignations()
     {
-        throw new NotImplementedException();
+        return await _repository.GetAllAsync();
     }
 
-    public Task UpdateDesignation(Designation designation)
+    public async Task<Designation> GetDesignationById(int id)
     {
-        throw new NotImplementedException();
+        return await _repository.GetByIdAsync(id);
+    }
+
+    public async Task UpdateDesignation(Designation designation)
+    {
+        await _repository.UpdateAsync(designation);
     }
 }
