@@ -21,6 +21,9 @@ namespace EMS.API
 
             services.AddSingleton<IDatabaseFactory, DatabaseFactory>();
 
+            services.AddScoped<IOperationLogRepository, OperationLogRepository>();
+            services.AddScoped<IOperationLogService, OperationLogService>();
+
             return services;
         }
 

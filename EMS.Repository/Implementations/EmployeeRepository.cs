@@ -68,7 +68,8 @@ public class EmployeeRepository : IEmployeeRepository
             parameters.Add("@Id", id);
 
             var employee = await db.QueryFirstOrDefaultAsync<EmployeeDetails>(
-                    StoredProcName.GetAllEmployees,
+                    StoredProcName.GetEmployeeById,
+                    parameters,
                     commandType: CommandType.StoredProcedure
                 );
 

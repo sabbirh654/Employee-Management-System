@@ -137,19 +137,6 @@ END;
 CREATE PROCEDURE GetAllEmployees
 AS
 BEGIN
-	SELECT e.Name, e.Email, e.Phone, e.Address, e.DOB,
-		   d.Name, dg.Name
-	FROM Employee e
-	JOIN Department d
-	ON d.Id = e.DepartmentId
-	JOIN Designation dg
-	ON dg.Id = e.DesignationId
-	WHERE e.IsDeleted = 0;
-END;
-
-CREATE PROCEDURE GetAllEmployees
-AS
-BEGIN
 	SELECT e.Id, e.Name, e.Email, e.Phone, e.Address, e.DOB,
 		   d.Id AS DepartmentId, dg.Id AS DesignationId,
 		   d.Name AS Department, dg.Name AS Designation

@@ -81,7 +81,7 @@ public class DesignationRepository : IDesignationRepository
             parameters.Add("@Name", designation.Name);
 
             await db.ExecuteAsync(
-                StoredProcName.UpdateDepartment,
+                StoredProcName.UpdateDesignation,
                 parameters,
                 commandType: CommandType.StoredProcedure);
         }
