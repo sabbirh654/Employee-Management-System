@@ -1,1 +1,24 @@
-<p>department-list works!</p>
+<header>
+    <h4>Department List</h4>
+    <a routerLink="/add-department">Add Department</a>
+</header>
+
+<p-table [value]="dataSource" styleClass="p-datatable-striped"
+    [tableStyle]="{ 'min-width': '50rem', 'height': '60vh' }">
+    <ng-template pTemplate="header">
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Category</th>
+            <th>Quantity</th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-employee>
+        <tr>
+            <td>{{ employee.position }}</td>
+            <td>{{ employee.name }}</td>
+            <td>{{ employee.weight }}</td>
+            <td>{{ employee.symbol }}</td>
+        </tr>
+    </ng-template>
+</p-table>

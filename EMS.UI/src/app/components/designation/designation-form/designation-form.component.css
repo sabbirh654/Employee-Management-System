@@ -1,0 +1,43 @@
+form {
+  border: 1px solid var(--color-gray);
+  padding: 1rem;
+}
+
+.input-wrapper {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1.5rem;
+}
+
+.input-wrapper input {
+  width: 15%;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  outline: none;
+  border: 1px solid greenyellow;
+}
+
+.button-wrapper {
+  display: flex;
+}
+
+.button-wrapper button,
+.button-wrapper a {
+  margin-right: 1rem;
+  outline: none;
+  border: none;
+  padding: 0.5rem 1rem;
+  background: var(--color-gray);
+  color: var(--color-dark);
+  cursor: pointer;
+}
+
+.button-wrapper button:first-child {
+  background: #000;
+  color: var(--color-white);
+}
+
+.button-wrapper a {
+  text-decoration: none;
+  color: var(--color-dark);
+}
