@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {MatTableModule} from '@angular/material/table';
 import {EmployeeService} from '../../../services/employee/employee.service';
-import { TableModule } from 'primeng/table';
+//import { TableModule } from 'primeng/table';
 import { RouterLink } from '@angular/router';
 
 export interface PeriodicElement {
@@ -26,12 +26,12 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 @Component({
   selector: 'app-employee-list',
-  standalone: true,
   imports: [
     RouterLink,
-    TableModule,
+    // TableModule,
   ],
   templateUrl: './employee-list.component.html',
+  standalone: true,
   styleUrl: './employee-list.component.css'
 })
 export class EmployeeListComponent implements OnInit {
@@ -53,7 +53,7 @@ export class EmployeeListComponent implements OnInit {
   }
 
   onClick() {
-    
+
   }
 
   onAddEmployee() {

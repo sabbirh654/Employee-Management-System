@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { PeriodicElement } from '../../employee/employee-list/employee-list.component';
-import { TableModule } from 'primeng/table';
+//import { TableModule } from 'primeng/table';
 import { RouterLink } from '@angular/router';
 
 const ELEMENT_DATA: PeriodicElement[] = [
@@ -18,9 +18,9 @@ const ELEMENT_DATA: PeriodicElement[] = [
 
 @Component({
   selector: 'app-department-list',
-  standalone: true,
-  imports: [RouterLink, TableModule],
+  imports: [RouterLink,],
   templateUrl: './department-list.component.html',
+  standalone: true,
   styleUrl: './department-list.component.css'
 })
 export class DepartmentListComponent {
