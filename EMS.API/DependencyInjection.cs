@@ -14,10 +14,12 @@ namespace EMS.API
             services.AddScoped<IDepartmentRepository, DepartmentRepository>();
             services.AddScoped<IDesignationRepository, DesignationRepository>();
             services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            services.AddScoped<IAttendanceRepository, AttendanceRepository>();
 
             services.AddScoped<IEmployeeService, EmployeeService>();
             services.AddScoped<IDepartmentService, DepartmentService>();
             services.AddScoped<IDesignationService, DesignationService>();
+            services.AddScoped<IAttendanceService, AttendanceService>();
 
             services.AddSingleton<IDatabaseFactory, DatabaseFactory>();
 
